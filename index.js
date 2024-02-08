@@ -50,7 +50,7 @@ app.use("/teacherReport", postReportByTeacher);
 app.use("/chooseClass", chooseClass);
 app.use("/teachTimeSlot", teacherTimeSlot);
 app.use("/teachIntro", teacherIntro);
-app.use("/teachCsb", TeacherCsb );
+app.use("/teachCsb", TeacherCsb);
 
 app.use("/payment", payment);
 app.use("/createClass", createClass);

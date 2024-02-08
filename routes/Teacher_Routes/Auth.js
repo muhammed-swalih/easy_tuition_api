@@ -4,6 +4,7 @@ import {
   TeacherLogin,
   TeacherRegister,
 } from "../../controllers/TeacherControllers/TeacherAuthController.js";
+import { protectStudent } from "../../middlewares/jwt.js";
 
 const router = express();
 
@@ -13,5 +14,6 @@ router.get("/", (req, res) => {
 
 router.post("/", TeacherRegister);
 router.post("/login", TeacherLogin);
+router.post("/",protectStudent)
 
 export default router;

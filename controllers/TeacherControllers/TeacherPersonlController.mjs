@@ -130,3 +130,20 @@ export const getAllTeacher = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+export const getTeacherByFiltering = async (req, res) => {
+  const { ids } = req.body;
+  try {
+    const response = await TeacherPersonalDetails.findOne({
+      teacherId: ids,
+    }).populate("teacherId", "-password");
+    if (!response) {
+      return res
+        .status(401)
+        .json("there is no personal datas for this teacher");
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

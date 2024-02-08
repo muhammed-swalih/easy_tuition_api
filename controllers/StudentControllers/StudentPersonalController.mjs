@@ -35,7 +35,7 @@ export const postStudPersonal = async (req, res) => {
     const uniqueFilename = uuidv4();
     const filePath = Buffer.from(req.file.path);
     const destination = `studentsImages/${
-      req.file.originalname + uniqueFilename
+      req.file.originalname 
     }`;
 
     bucket

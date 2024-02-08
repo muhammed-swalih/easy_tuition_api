@@ -31,9 +31,7 @@ export const postStudSchool = async (req, res) => {
     }
     const uniqueFilename = uuidv4();
     const filePath = Buffer.from(req.file.path);
-    const destination = `studentSchoolIdProof/${
-      req.file.originalname + uniqueFilename
-    }`;
+    const destination = `studentSchoolIdProof/${req.file.originalname}`;
 
     bucket
       .upload(filePath, {
