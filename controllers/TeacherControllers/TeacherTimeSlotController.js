@@ -47,12 +47,29 @@ export const getAllTimeSlots = async (req, res) => {
       "-password"
     );
 
-    if(!getAllTime){
-        res.status(400).json("there is no timeslots")
+    if (!getAllTime) {
+      res.status(400).json("there is no timeslots");
     }
 
     res.status(200).json(getAllTime);
   } catch (error) {
     return res.status(500).json(error);
+  }
+};
+
+export const getTeacherAvailableTimeForStudent = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const response = await TeacherTimeSlotsModels.findOne({
+      teacherId: id,
+    }).populate("teacherId", "-password");
+
+    if (!response) {
+      return res.status(404).json("there is no teacher with this id");
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

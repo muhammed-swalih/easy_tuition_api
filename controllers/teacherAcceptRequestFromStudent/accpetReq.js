@@ -2,7 +2,7 @@ import ReqModel from "../../models/TeacheReqModelFromStudent/ReqModel.js";
 import Class from "../../models/classModel/Class.js";
 
 export const acceptClass = async (req, res) => {
-  const { reqId, teacher, student } = req.body;
+  const { reqId, teacher, student, studentPersonal, studentSchool } = req.body;
 
   if (!reqId || !teacher || !student) {
     res.status(404).json("please fill the required feild");
@@ -18,6 +18,8 @@ export const acceptClass = async (req, res) => {
     reqId: reqId,
     teacher: teacher,
     student: student,
+    studentPersonal: studentPersonal,
+    studentSchool: studentSchool,
   };
 
   try {
@@ -25,7 +27,10 @@ export const acceptClass = async (req, res) => {
     const response = await Class.findOne({ _id: createdClass._id })
       .populate("reqId")
       .populate("teacher", "-password")
-      .populate("student", "-password");
+      .populate("student", "-password")
+      .populate("reqId.student")
+      .populate("studentPersonal")
+      .populate("studentSchool");
 
     res.status(200).json(response);
   } catch (error) {
@@ -69,6 +74,16 @@ export const getAcceptedClass = async (req, res) => {
     }
 
     res.status(200).json(classes);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getExistingStudents = async (req, res) => {
+  const { id } = req.params.id;
+  try {
+    const response = await Class.find({ teacher: req.user._id, reqId: id });
+    res.status(401).json(response);
   } catch (error) {
     res.status(500).json(error);
   }

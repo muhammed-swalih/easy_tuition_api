@@ -1,7 +1,7 @@
 import ReqModel from "../../models/TeacheReqModelFromStudent/ReqModel.js";
 import Class from "../../models/classModel/Class.js";
 
-export const  postReqFromStud = async (req, res) => {
+export const postReqFromStud = async (req, res) => {
   const {
     studPersonal,
     studSchool,
@@ -10,6 +10,7 @@ export const  postReqFromStud = async (req, res) => {
     board,
     time,
     subjects,
+    cls,
   } = req.body;
 
   if (
@@ -19,7 +20,8 @@ export const  postReqFromStud = async (req, res) => {
     !studentId ||
     !board ||
     !time ||
-    !subjects
+    !subjects ||
+    !cls
   ) {
     res.status(404).json("please fill the required feilds");
     return;
@@ -33,6 +35,7 @@ export const  postReqFromStud = async (req, res) => {
     board: board,
     time: time,
     subjects: subjects,
+    cls: cls,
   };
 
   try {

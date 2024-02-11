@@ -13,6 +13,7 @@ const ReqSchema = new Schema({
   board: { type: String, required: true },
   time: { type: String, required: true },
   subjects: [{ type: String, required: true }],
+  cls: { type: String, required: true },
 });
 
 export default mongoose.model("studentRequest", ReqSchema);

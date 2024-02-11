@@ -102,3 +102,17 @@ export const getAllIntro = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+export const getTeachIntroForStudent = async (req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  try {
+    const response = await TeachIntroModel.findOne({ teacherId: id });
+    if (!response) {
+      return res.status(404).json("there is no teacher with this id");
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

@@ -12,6 +12,7 @@ import {
 import {
   acceptClass,
   getAcceptedClass,
+  getExistingStudents,
   getReqFromStud,
 } from "../../controllers/teacherAcceptRequestFromStudent/accpetReq.js";
 
@@ -22,6 +23,7 @@ router.post("/acceptClass", protect, acceptClass);
 router.get("/", protect, getReqFromStud);
 router.get("/acceptedClassesFromStudent", protect, getAcceptedClass);
 router.get("/getAllClasses", protectStudent, showAllClassesToStudents);
+router.get("/:id", protect, getExistingStudents);
 router.get(
   "/enrollClasses",
   protectStudent,
